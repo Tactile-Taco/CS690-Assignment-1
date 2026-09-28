@@ -1,0 +1,15 @@
+def top_k_frequent(items, k):
+    counts = {}
+    first_seen = {}
+    for index, item in enumerate(items):
+        if item not in counts:
+            counts[item] = 0
+            first_seen[item] = index
+        counts[item] += 1
+    return [
+        item
+        for item, _ in sorted(
+            counts.items(),
+            key=lambda pair: (-pair[1], first_seen[pair[0]])
+        )[:k]
+    ]
